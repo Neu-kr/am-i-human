@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>無限hCaptcha</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css" />
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const widgetCount = 18;
+    const siteKey = "fc96bbb4-6794-4c28-8e2c-9c1ec892c94c"; 
+
+    const App = () => {
+      const [verified, setVerified] = React.useState(Array(widgetCount).fill(false));
+
+      const onVerify = (index, token) => {
+        if (token) {
+          const newVerified = [...verified];
+          newVerified[index] = true;
+          setVerified(newVerified);
+        }
+      };
+
+      const allVerified = verified.every(status => status);
+
+      return (
+        <div>
+          <section className="hero is-primary">
+            <div className="hero-body">
+              <p className="title">
+                無限hCaptcha
+              </p>
+            </div>
+          </section>
+          <div className="container">
+            {allVerified ? (
+              <section className="hero is-success">
+                <div className="hero-body">
+                  <p className="title">
+                    おめでとうございます！すべてのhCaptchaをクリアしました。
+                  </p>
+                </div>
+              </section>
+            ) : (
+              [...Array(widgetCount / 3).keys()].map(i => (
+                <div className="columns" key={i}>
+                  {[...Array(3).keys()].map(j => {
+                    const index = i * 3 + j;
+                    return (
+                      <div className="column" key={index}>
+                        <div className="h-captcha"
+                          data-sitekey={siteKey}
+                          data-callback={(token) => onVerify(index, token)}
+                        ></div>
+                      </div>
+                    );
+                  })}
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+</body>
+
+</html>
