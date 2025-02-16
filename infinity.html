@@ -20,13 +20,12 @@
     const App = () => {
       const [verified, setVerified] = React.useState(Array(widgetCount).fill(false));
 
-      // グローバル関数を useEffect で設定
       React.useEffect(() => {
-        window.onVerify = (token, widgetId) => {
+        window.onVerify = (token, index) => {
           if (token) {
             setVerified(prevState => {
               const newState = [...prevState];
-              newState[widgetId] = true;
+              newState[index] = true;
               return newState;
             });
           }
@@ -63,7 +62,7 @@
                         <div className="h-captcha"
                           data-sitekey={siteKey}
                           data-callback="onVerify"
-                          data-widgetid={index}  <!-- widget ID を渡す -->
+                          data-index={index}
                         ></div>
                       </div>
                     );
@@ -78,7 +77,7 @@
 
     ReactDOM.render(<App />, document.getElementById('root'));
   </script>
-  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+  <script src="https://js.hcaptcha.com/1/api.js" async defer crossorigin="anonymous"></script>
 </body>
 
 </html>
