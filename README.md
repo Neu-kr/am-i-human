@@ -1,5 +1,8 @@
-# Welcome to GitHub Desktop!
+# am-i-human
 
-This is your README. READMEs are where you can communicate what your project is and how to use it.
+このプロジェクトは、ラムダ技術部のコードをコピーして作成しました。
 
-Write your name on line 6, save it, and then head back to GitHub Desktop.
+[パクったGithubのリポジトリ](https://github.com/lambda-tech-club/am-i-human)
+
+[Twitter：ラムダ技術部](https://twitter.com/lambda_tech)
+
