@@ -15,18 +15,20 @@
   <div id="root"></div>
   <script type="text/babel">
     const widgetCount = 18;
-    const siteKey = "fc96bbb4-6794-4c28-8e2c-9c1ec892c94c"; 
+    const siteKey = "fc96bbb4-6794-4c28-8e2c-9c1ec892c94c";
 
     const App = () => {
       const [verified, setVerified] = React.useState(Array(widgetCount).fill(false));
 
-      const onVerify = (index, token) => {
-        if (token) {
-          const newVerified = [...verified];
-          newVerified[index] = true;
-          setVerified(newVerified);
-        }
-      };
+      React.useEffect(() => {
+        window.onVerify = (token, index) => {
+          if (token) {
+            const newVerified = [...verified];
+            newVerified[index] = true;
+            setVerified(newVerified);
+          }
+        };
+      }, [verified]);
 
       const allVerified = verified.every(status => status);
 
@@ -57,7 +59,8 @@
                       <div className="column" key={index}>
                         <div className="h-captcha"
                           data-sitekey={siteKey}
-                          data-callback={(token) => onVerify(index, token)}
+                          data-callback="onVerify"
+                          data-index={index}
                         ></div>
                       </div>
                     );

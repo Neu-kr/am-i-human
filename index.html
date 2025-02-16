@@ -15,15 +15,18 @@
   <div id="root"></div>
   <script type="text/babel">
     const se = new Audio('tada.wav');
+
     const App = () => {
       const [verified, setVerified] = React.useState(false);
 
-      const onVerify = (token) => {
-        if (token) {
-          se.play();
-          setVerified(true);
-        }
-      };
+      React.useEffect(() => {
+        window.onVerify = (token) => {
+          if (token) {
+            se.play();
+            setVerified(true);
+          }
+        };
+      }, []);
 
       return (
         <div>
@@ -57,7 +60,10 @@
                     width: '300px',
                     marginTop: '20px'
                   }}>
-                    <div className="h-captcha" data-sitekey="fc96bbb4-6794-4c28-8e2c-9c1ec892c94c" data-callback="onVerify"></div>
+                    <div className="h-captcha" 
+                      data-sitekey="fc96bbb4-6794-4c28-8e2c-9c1ec892c94c" 
+                      data-callback="onVerify">
+                    </div>
                   </div>
                 </div>
               </div>
