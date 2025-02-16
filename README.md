@@ -6,3 +6,7 @@
 
 [Twitter：ラムダ技術部](https://twitter.com/lambda_tech)
 
+# ページアクセスURL
+[一個の方](https://neu-kr.github.io/am-i-human/index.html)
+[いっぱいある方](https://neu-kr.github.io/am-i-human/infinity.html)
+
